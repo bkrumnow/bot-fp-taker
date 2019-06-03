@@ -22,7 +22,10 @@ def does_exist(file_with_path):
 def set_up_firefox():
     """ Downloads Firefox """
     print("Downloading Firefox {}".format(FIREFOX_VERSION))
-    status = os.system("wget -O target.dmg {}".format(FIREFOX_URL))
+    
+    OS_STRING = "mac" if IS_MAC_OS else "linux-x86_64"
+    fx_url = FIREFOX_URL.format(FIREFOX_VERSION, OS_STRING)
+    status = os.system("wget -O target.dmg {}".format(fx_url))
     if status != 0:
         raise Exception("Could not download Firefox.")
     
@@ -37,12 +40,13 @@ def set_up_firefox():
 
 def set_up_geckodriver():
     """ Downloads the files Geckodriver """
-    print("Downloading Firefox {}".format(GECKODRIVER_VERSION))
-    OS_STRING = "macos"
-    #OS specific in any case. Apply both to ubuntu!
-    status = os.system("wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v{0}/geckodriver-v{0}-{1}.tar.gz".format(GECKODRIVER_VERSION, OS_STRING))
-    if status != 0:
-        raise Exception("Could not download Geckodriver.")
+    print("Downloading Geckodriver {}".format(GECKODRIVER_VERSION))
+    OS_STRING = "macos" if IS_MAC_OS else "linux64"
+
+    geckodriver_url = GECKODRIVER_URL.format(GECKODRIVER_VERSION, OS_STRING)
+    status = os.system("wget -O geckodriver.tar.gz {}".format(geckodriver_url))
+    #if status != 0:
+    #    raise Exception("Could not download Geckodriver.")
     
     
     path = os.path.join(GECKODRIVER_DIR, GECKODRIVER_VERSION)
