@@ -10,7 +10,7 @@ Only Geckodriver with Firefox is currently supported.
 
 ## Installation
 This project uses python 3.
-Install a Selenium version of your choice. By defaul Selenium 3.141 is used:
+Install a Selenium version of your choice. By default Selenium 3.141 is used:
   
   `pip install -r requirements.txt`
 
