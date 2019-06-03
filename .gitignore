@@ -108,3 +108,6 @@ resources/webdriver
 
 # Firefox files
 resources/firefox
+
+# ingore local config file
+config.py
