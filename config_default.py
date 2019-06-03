@@ -27,4 +27,8 @@ BROWSER_MODE = Options()
 if HEADLESS:
     BROWSER_MODE.add_argument("--headless")
 
-CONFIGURATION_NAME = name if name else "Firefox_{}_gecko_{}_{}_{}_automated ".format(FIREFOX_VERSION, GECKODRIVER_VERSION, "headless" if HEADLESS else "headful", "macos" if IS_MAC_OS else: "ubuntu")
+CONFIGURATION_NAME = name if name else "Firefox_{}_gecko_{}_{}_{}_automated ".format(FIREFOX_VERSION
+                                                                            , GECKODRIVER_VERSION
+                                                                            , "headless" if HEADLESS else "headful"
+                                                                            , "macos" if IS_MAC_OS else "ubuntu"
+                                                                            )
