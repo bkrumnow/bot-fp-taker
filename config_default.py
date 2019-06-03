@@ -6,10 +6,10 @@ from selenium.webdriver.firefox.options import Options
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-IS_MAC_OS = True
-FIREFOX_VERSION = "66.0"
+IS_MAC_OS = False
+FIREFOX_VERSION = "67.0"
 GECKODRIVER_VERSION = "0.24.0"
-HEADLESS = True
+HEADLESS = False
 name = None
     
 URL = "http://localhost:8080/"

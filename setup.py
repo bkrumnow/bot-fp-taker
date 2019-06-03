@@ -20,23 +20,35 @@ def does_exist(file_with_path):
     return os.path.isfile(file_with_path)
 
 def set_up_firefox():
-    """ Downloads Firefox """
-    print("Downloading Firefox {}".format(FIREFOX_VERSION))
+	""" Downloads Firefox """
+	print("Downloading Firefox {}".format(FIREFOX_VERSION))
     
-    OS_STRING = "mac" if IS_MAC_OS else "linux-x86_64"
-    fx_url = FIREFOX_URL.format(FIREFOX_VERSION, OS_STRING)
-    status = os.system("wget -O target.dmg {}".format(fx_url))
-    if status != 0:
-        raise Exception("Could not download Firefox.")
+
+	OS_STRING = "mac" if IS_MAC_OS else "linux-x86_64"
+	fx_url = FIREFOX_URL.format(FIREFOX_VERSION, OS_STRING)
+	
+	if IS_MAC_OS:
+		status = os.system("wget -O target.dmg {}".format(fx_url))
+		if status != 0:
+			raise Exception("Could not download Firefox.")
+		os.system("hdiutil attach -nobrowse -mountpoint /Volumes/firefox-tmp target.dmg")    
+	else:
+		status = os.system("wget -O target.tar.bz2 {}".format(fx_url))
+		if status != 0:
+			raise Exception("Could not download Firefox.")
+		os.system("tar jxf target.tar.bz2")
     
-    #OS-Specific?
-    os.system("hdiutil attach -nobrowse -mountpoint /Volumes/firefox-tmp target.dmg")
-    
-    path = os.path.join(FIREFOX_DIR, FIREFOX_VERSION)
-    os.system("mkdir {}".format(path))
-    os.system("cp -r /Volumes/firefox-tmp/Firefox.app {}/Firefox.app".format(path))
-    os.system("hdiutil detach /Volumes/firefox-tmp")
-    os.system("rm target.dmg")
+	path = os.path.join(FIREFOX_DIR, FIREFOX_VERSION)
+	os.system("mkdir {}".format(path))
+	
+	if IS_MAC_OS:
+		os.system("cp -r /Volumes/firefox-tmp/Firefox.app {}/Firefox.app".format(path))
+		os.system("hdiutil detach /Volumes/firefox-tmp")
+		os.system("rm target.dmg")
+	else:
+		print(path)
+		os.system("mv firefox {}/firefox".format(path))
+		os.system("rm target.tar.bz2")
 
 def set_up_geckodriver():
     """ Downloads the files Geckodriver """
