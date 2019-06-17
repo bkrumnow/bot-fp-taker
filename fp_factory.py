@@ -13,11 +13,17 @@ from config import FIREFOX_BINARY
 from config import URL
 from config import CONFIGURATION_NAME
 from config import BROWSER_MODE
-
+from config import EXTENSION
+from config import HIDE_WEBDRIVER
 
 set_up_environment()
 
 driver = webdriver.Firefox(executable_path=GECKODRIVER_BINARY, firefox_binary=FIREFOX_BINARY, firefox_options = BROWSER_MODE)
+
+#injects the firefox extension to overwride web driver specifc variables
+if HIDE_WEBDRIVER:
+    driver.install_addon(EXTENSION, temporary=True)
+    
 try: 
     driver.get(URL)
 except Exception:
@@ -30,6 +36,8 @@ submit_btn = driver.find_element_by_id(SUBMIT_BTN_ID)
 
 try:
     actions = ActionChains(driver)
+    print("DO IT")
+    time.sleep(10)
     actions.move_to_element(input_field).click(input_field).send_keys(CONFIGURATION_NAME).send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
     time.sleep(3)
     alert = driver.switch_to_alert()
