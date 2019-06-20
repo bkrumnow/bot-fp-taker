@@ -109,5 +109,11 @@ resources/webdriver
 # Firefox files
 resources/firefox
 
-# ingore local config file
+# ignore local config file
 config.py
+
+# ignore created extensions (.xpi files)
+extensions/*.xpi
+
+# ignore all .DS_Store
+.DS_Store
