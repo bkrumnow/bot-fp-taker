@@ -21,6 +21,10 @@ Duplicate the config_default.py and name it config.py. Adjust the following fiel
 * `GECKODRIVER_VERSION`: Geckodriver version that shall be used, e.g. "0.24.0"
 * `HEADLESS`: Headless mode on/off
 * `name (default: None)`: Set for a custom string. By default it uses a string consisting of Firefox version, Geckodriver   version, OS string and headless mode  
+
+Build the stealth extension with:
+
+  `make -F Makefile`
   
 ## Usage
 run with:
