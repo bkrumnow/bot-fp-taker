@@ -36,8 +36,7 @@ submit_btn = driver.find_element_by_id(SUBMIT_BTN_ID)
 
 try:
     actions = ActionChains(driver)
-    print("DO IT")
-    time.sleep(10)
+    time.sleep(1)
     actions.move_to_element(input_field).click(input_field).send_keys(CONFIGURATION_NAME).send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
     time.sleep(3)
     alert = driver.switch_to_alert()

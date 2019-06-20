@@ -19,7 +19,7 @@ FIREFOX_URL = "https://ftp.mozilla.org/pub/firefox/releases/{0}/{1}/en-US/Firefo
 GECKODRIVER_URL = "https://github.com/mozilla/geckodriver/releases/download/v{0}/geckodriver-v{0}-{1}.tar.gz"
 
 EXTENSION_FOLDER = os.path.join(__location__,'extensions')
-EXTENSION = os.path.join(EXTENSION_FOLDER, "stealth.xpi")
+EXTENSION = os.path.join(EXTENSION_FOLDER, "stealth_bot.xpi")
 
 RESOURCE_FOLDER = os.path.join(__location__, 'resources')
 FIREFOX_DIR = os.path.join(RESOURCE_FOLDER, 'firefox')
