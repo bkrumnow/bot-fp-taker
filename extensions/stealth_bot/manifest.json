@@ -5,7 +5,8 @@
   "description": "Deletes the webdriver artefacts that reveals a web bot",
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+	    "all_frames": true,
+      "matches": ["<all_urls>"],
       "js": ["delete_wd.js"],
       "run_at": "document_start"
     }
