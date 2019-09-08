@@ -1,3 +1,4 @@
+console.log("Stealth extension running");
 function rewrite(obj, property, value_in){
 	/** Rewrites on a single property of an object
 		*	@type property is a string 
@@ -9,7 +10,6 @@ function rewrite(obj, property, value_in){
 	command = "Object.defineProperty(" + obj + ", '" + property + "', {\
 		enumerable: true,\
 		value: "+ value_string +"});";
-	console.log(command)
 	window.eval(command);
 }
 

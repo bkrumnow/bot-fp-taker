@@ -6,6 +6,7 @@ from selenium.webdriver.firefox.options import Options
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
+USE_NIGHTLY = False
 IS_MAC_OS = False
 FIREFOX_VERSION = "67.0"
 GECKODRIVER_VERSION = "0.24.0"
