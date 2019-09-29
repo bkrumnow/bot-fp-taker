@@ -36,7 +36,20 @@ def run():
         run_SLG19(driver, CONFIGURATION_NAME)
     else:
         run_JKV19(driver, CONFIGURATION_NAME)
+    	run_openwpm_detector(driver)
 
+def run_openwpm_detector(driver):
+    try:        
+        """ clicks the button in order to start fingerprinting """
+        time.sleep(5)
+        el = driver.find_element_by_css_selector("#detect")
+        action = ActionChains(driver)
+        action.move_to_element(el).click(el).perform()
+        time.sleep(10)
+    except Exception as e:
+        print("Error executing the interaction:\n {}".format(e))
+    finally:
+        driver.close()    
 
 def run_SLG19(driver, text):
     try:        
@@ -50,7 +63,7 @@ def run_SLG19(driver, text):
         alert.send_keys(text)
         time.sleep(2)
         alert.accept()
-        time.sleep(10)
+        time.sleep(7)
     except Exception as e:
         print("Error executing SLG19 interaction:\n {}".format(e))
     finally:
@@ -69,6 +82,7 @@ def run_JKV19(driver, text):
         time.sleep(3)
         alert = driver.switch_to_alert()
         alert.accept()
+        time.sleep(2)
         print("Fingerprint taken for {}".format(text))
     except Exception as e:
         print("Error executing JKV19 interaction:\n {}".format(e))
