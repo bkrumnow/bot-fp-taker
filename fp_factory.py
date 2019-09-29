@@ -15,11 +15,12 @@ from config import CONFIGURATION_NAME
 from config import BROWSER_MODE
 from config import EXTENSION
 from config import HIDE_WEBDRIVER
+from config import EXPERIMENT
 
 
 def run():
     set_up_environment()
-
+    print(GECKODRIVER_BINARY)
     driver = webdriver.Firefox(executable_path=GECKODRIVER_BINARY, firefox_binary=FIREFOX_BINARY, firefox_options = BROWSER_MODE)
 
     #injects the firefox extension to overwride web driver specifc variables
@@ -31,8 +32,10 @@ def run():
     except Exception:
         raise Exception("Could not connect. Is the fingerprint server running?")
 
-    run_SLG19(driver, CONFIGURATION_NAME)
-    #run_JKV19(driver, CONFIGURATION_NAME)
+    if EXPERIMENT == "SLG19":
+        run_SLG19(driver, CONFIGURATION_NAME)
+    else:
+        run_JKV19(driver, CONFIGURATION_NAME)
 
 
 def run_SLG19(driver, text):
@@ -49,7 +52,7 @@ def run_SLG19(driver, text):
         alert.accept()
         time.sleep(10)
     except Exception as e:
-        print("Error executing the interaction:\n {}".format(e))
+        print("Error executing SLG19 interaction:\n {}".format(e))
     finally:
         driver.close()    
 
@@ -68,7 +71,7 @@ def run_JKV19(driver, text):
         alert.accept()
         print("Fingerprint taken for {}".format(text))
     except Exception as e:
-        print("Error executing the interaction:\n {}".format(e))
+        print("Error executing JKV19 interaction:\n {}".format(e))
     finally:
         driver.close()
 
