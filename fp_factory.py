@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from setup import set_up_environment
 
@@ -34,22 +35,27 @@ def run():
 
     if EXPERIMENT == "SLG19":
         run_SLG19(driver, CONFIGURATION_NAME)
-    else:
+    elif EXPERIMENT == "JKV19":
         run_JKV19(driver, CONFIGURATION_NAME)
-    	run_openwpm_detector(driver)
+    else:
+        run_openwpm_detector(driver)
+
 
 def run_openwpm_detector(driver):
     try:        
         """ clicks the button in order to start fingerprinting """
         time.sleep(5)
-        el = driver.find_element_by_css_selector("#detect")
+        el = driver.find_element_by_id("detect")
         action = ActionChains(driver)
         action.move_to_element(el).click(el).perform()
-        time.sleep(10)
+        time.sleep(6)
+        driver.save_screenshot("screenshot.png")
+        ele = driver.find_element_by_css_selector("body")
+        print(ele.get_attribute('innerHTML'))
     except Exception as e:
         print("Error executing the interaction:\n {}".format(e))
     finally:
-        driver.close()    
+        driver.close()
 
 def run_SLG19(driver, text):
     try:        
