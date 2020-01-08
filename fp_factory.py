@@ -37,6 +37,8 @@ def run():
         run_SLG19(driver, CONFIGURATION_NAME)
     elif EXPERIMENT == "JKV19":
         run_JKV19(driver, CONFIGURATION_NAME)
+    elif EXPERIMENT == "biometric":
+        run_biometric(driver)
     else:
         run_openwpm_detector(driver)
 
@@ -94,6 +96,33 @@ def run_JKV19(driver, text):
         print("Error executing JKV19 interaction:\n {}".format(e))
     finally:
         driver.close()
+
+def run_biometric(driver):
+    
+    try:
+        # Open test for biometry
+        time.sleep(1)
+        driver.execute_script("document.querySelector('#biometry').click()")
+        time.sleep(3)
+
+        # Run test
+        action = ActionChains(driver)
+        el = driver.find_element_by_css_selector("button")        
+        actions = ActionChains(driver)
+        time.sleep(1)
+        action.move_to_element(el).click(el).perform()
+        time.sleep(8)
+        
+        el = driver.find_element_by_css_selector("input")
+        action.move_to_element(el).click(el).perform()
+        time.sleep(1)
+        action.send_keys("bot detection").perform()
+        time.sleep(60)
+    except Exception as e:
+        print("Error executing bimetrical tests interaction:\n {}".format(e))
+    finally:
+        driver.close()
+    
 
 if __name__ == "__main__":
     run()
