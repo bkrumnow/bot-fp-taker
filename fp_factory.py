@@ -39,6 +39,8 @@ def run():
         run_JKV19(driver, CONFIGURATION_NAME)
     elif EXPERIMENT == "biometric":
         run_biometric(driver)
+    elif EXPERIMENT == "idle":
+        run_idle(driver)
     else:
         run_openwpm_detector(driver)
 
@@ -123,6 +125,9 @@ def run_biometric(driver):
     finally:
         driver.close()
     
+def run_idle(driver):
+    print("Idling")
+    time.sleep(60000)
 
 if __name__ == "__main__":
     run()
